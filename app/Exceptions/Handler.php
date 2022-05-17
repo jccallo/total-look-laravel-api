@@ -44,7 +44,8 @@ class Handler extends ExceptionHandler
     // personalizando errores de validaciones
     protected function invalidJson($request, ValidationException $exception) {
         return response()->json([
-            'res' => __('Los datos proporcionados no son validos.'),
+            'res' => false,
+            'msg' => __('Los datos proporcionados no son validos.'),
             'errores' => $exception->errors()
         ], $exception->status);
     }

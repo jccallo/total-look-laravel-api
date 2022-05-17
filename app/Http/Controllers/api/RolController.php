@@ -20,7 +20,7 @@ class RolController extends Controller
     {
         return response()->json([
             'res' => true,
-            'roles' => Rol::all()
+            'roles' => Rol::paginate(3)
         ], 200);
 
         // return RolResource::collection(Rol::all());
@@ -94,11 +94,17 @@ class RolController extends Controller
      */
     public function destroy(Rol $rol)
     {
-        $rol->delete();
+        $rol->update(['estado' => 'eliminado']);
         return response()->json([
             'res' => true,
             'msg' => 'Rol eliminado correctamente.'
         ], 200);
+
+        // $rol->delete();
+        // return response()->json([
+        //     'res' => true,
+        //     'msg' => 'Rol eliminado correctamente.'
+        // ], 200);
 
         // $rol->delete();
         // return (new RolResource($rol))

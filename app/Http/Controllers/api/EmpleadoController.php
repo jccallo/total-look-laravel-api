@@ -20,7 +20,7 @@ class EmpleadoController extends Controller
     {
         return response()->json([
             'res' => true,
-            'empleados' => Empleado::all()
+            'empleados' => Empleado::paginate(3)
         ], 200);
 
         // return Empleado::find(1)->rol->nombre;
@@ -79,10 +79,16 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        $empleado->delete();
+        $empleado->update(['estado' => 'eliminado']);
         return response()->json([
             'res' => true,
             'msg' => 'Empleado eliminado correctamente.'
         ], 200);
+
+        // $empleado->delete();
+        // return response()->json([
+        //     'res' => true,
+        //     'msg' => 'Empleado eliminado correctamente.'
+        // ], 200);
     }
 }
