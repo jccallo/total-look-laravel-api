@@ -20,7 +20,7 @@ class EmpleadoController extends Controller
     {
         return response()->json([
             'res' => true,
-            'empleados' => Empleado::paginate(3)
+            'empleados' => Empleado::all()
         ], 200);
 
         // return Empleado::find(1)->rol->nombre;

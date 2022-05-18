@@ -20,7 +20,7 @@ class RolController extends Controller
     {
         return response()->json([
             'res' => true,
-            'roles' => Rol::paginate(3)
+            'roles' => Rol::all()
         ], 200);
 
         // return RolResource::collection(Rol::all());
