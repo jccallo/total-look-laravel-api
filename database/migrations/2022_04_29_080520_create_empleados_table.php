@@ -22,7 +22,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('telefono', 15)->unique(); // not null
             $table->string('direccion', 90); // not null
             $table->string('imagen', 255); // not null
-            $table->enum('estado', ['activo', 'bloqueado', 'eliminado'])->default('activo');
+            $table->enum('estado', ['activo', 'eliminado'])->default('activo');
             $table->string('email', 90)->unique(); // not null
             $table->string('password', 255); // not null
 

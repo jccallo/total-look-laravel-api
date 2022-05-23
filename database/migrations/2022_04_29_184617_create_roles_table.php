@@ -18,7 +18,7 @@ class CreateRolesTable extends Migration
 
             $table->string('nombre', 45)->unique(); // not null
             $table->string('descripcion', 90); // not null
-            $table->enum('estado', ['activo', 'bloqueado', 'eliminado'])->default('activo');
+            $table->enum('estado', ['activo', 'eliminado'])->default('activo');
 
             $table->timestamps();
         });

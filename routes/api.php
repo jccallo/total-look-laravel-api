@@ -29,4 +29,9 @@ Route::delete('roles/{rol}', [RolController::class, 'destroy']);
 
 // Route::apiResource('roles', RolController::class);
 Route::get('empleados', [EmpleadoController::class, 'index']);
+Route::post('empleados', [EmpleadoController::class, 'store']);
+Route::get('empleados/{empleado}', [EmpleadoController::class, 'show']);
+Route::put('empleados/{empleado}', [EmpleadoController::class, 'update']);
+Route::delete('empleados/{empleado}', [EmpleadoController::class, 'destroy']);
+
 

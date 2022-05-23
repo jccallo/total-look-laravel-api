@@ -7,7 +7,6 @@ use App\Http\Requests\StoreEmpleadoRequest;
 use App\Http\Requests\UpdateEmpleadoRequest;
 use App\Http\Resources\EmpleadoResource;
 use App\Models\Empleado;
-use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
 {
@@ -18,12 +17,12 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        return response()->json([
+        $perPage = request('perpage') ? intval(request('perpage')) : 10;
+        return (EmpleadoResource::collection(Empleado::paginate($perPage)))
+        ->additional([
             'res' => true,
-            'empleados' => Empleado::all()
-        ], 200);
-
-        // return Empleado::find(1)->rol->nombre;
+            'msg' => 'Empleado listado correctamente.',
+        ]);
     }
 
     /**
@@ -34,11 +33,11 @@ class EmpleadoController extends Controller
      */
     public function store(StoreEmpleadoRequest $request)
     {
-        Empleado::create($request->all());
-        return response()->json([
+        return (new EmpleadoResource(Empleado::create($request->all())))
+        ->additional([
             'res' => true,
             'msg' => 'Empleado guardado correctamente.'
-        ], 201);
+        ]);
     }
 
     /**
@@ -49,10 +48,17 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        return response()->json([
+        return (new EmpleadoResource($empleado))
+        ->additional([
             'res' => true,
-            'empleado' => $empleado
-        ], 200);
+            'msg' => 'Empleado mostrado correctamente.'
+        ]);
+
+        // $emp = Empleado::find($empleado->id)->with('rol'); /////
+        // $emp = Empleado::with('rol')->where('id', $empleado->id)->first();
+        // $rol = Rol::find($empleado->id)->nombre;
+        // $rol = Empleado::find($empleado->id)->rol->nombre;
+        // $empleado->roles = Empleado::find($empleado->id)->rol;
     }
 
     /**
@@ -65,10 +71,11 @@ class EmpleadoController extends Controller
     public function update(UpdateEmpleadoRequest $request, Empleado $empleado)
     {
         $empleado->update($request->all());
-        return response()->json([
+        return (new EmpleadoResource($empleado))
+        ->additional([
             'res' => true,
             'msg' => 'Empleado actualizado correctamente.'
-        ], 200);
+        ]);
     }
 
     /**
@@ -80,15 +87,10 @@ class EmpleadoController extends Controller
     public function destroy(Empleado $empleado)
     {
         $empleado->update(['estado' => 'eliminado']);
-        return response()->json([
+        return (new EmpleadoResource($empleado))
+        ->additional([
             'res' => true,
             'msg' => 'Empleado eliminado correctamente.'
-        ], 200);
-
-        // $empleado->delete();
-        // return response()->json([
-        //     'res' => true,
-        //     'msg' => 'Empleado eliminado correctamente.'
-        // ], 200);
+        ]);
     }
 }

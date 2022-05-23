@@ -27,7 +27,7 @@ class StoreRolRequest extends FormRequest
         return [
             'nombre' => ['required', 'max:45', 'string', Rule::unique('roles', 'nombre')],
             'descripcion' => ['required', 'max:90', 'string'],
-            'estado' => ['required', 'string'],
+            'estado' => ['required', 'string'], 
         ];
     }
 }
