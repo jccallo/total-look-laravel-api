@@ -31,6 +31,7 @@ class UpdateEmpleadoRequest extends FormRequest
             'dni' => ['required', 'max:15', 'string', Rule::unique('empleados', 'dni')->ignore($this->empleado->id, 'id')],
             'telefono' => ['required', 'max:15', 'string', Rule::unique('empleados', 'telefono')->ignore($this->empleado->id, 'id')],
             'direccion' => ['required', 'max:90', 'string'],
+            // 'imagen' => 'required|image|mimes:jpeg,png,svg|max:1024',
             'imagen' => ['required', 'max:255', 'string'],
             'estado' => ['required', 'string'],
             'email' => ['required', 'max:90', 'string', Rule::unique('empleados', 'email')->ignore($this->empleado->id, 'id')],

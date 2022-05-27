@@ -20,15 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// rutas clasicas
+// roles
 Route::get('roles', [RolController::class, 'index']);
 Route::post('roles', [RolController::class, 'store']);
 Route::get('roles/{rol}', [RolController::class, 'show']);
 Route::put('roles/{rol}', [RolController::class, 'update']);
 Route::delete('roles/{rol}', [RolController::class, 'destroy']);
 
-// Route::apiResource('roles', RolController::class);
+// empleados
 Route::get('empleados', [EmpleadoController::class, 'index']);
+Route::get('empleados/crear', [EmpleadoController::class, 'create']);
 Route::post('empleados', [EmpleadoController::class, 'store']);
 Route::get('empleados/{empleado}', [EmpleadoController::class, 'show']);
 Route::put('empleados/{empleado}', [EmpleadoController::class, 'update']);

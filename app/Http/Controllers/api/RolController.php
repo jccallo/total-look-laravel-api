@@ -11,94 +11,83 @@ use Illuminate\Http\Request;
 
 class RolController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return response()->json([
+        $perPage = request('perpage') ? intval(request('perpage')) : 10;
+        return (RolResource::collection(Rol::orderByDesc('id')->paginate($perPage)))
+        ->additional([
             'res' => true,
-            'roles' => Rol::all()
-        ], 200);
+            'msg' => 'Rol listado correctamente.',
+        ]);
 
-        // return RolResource::collection(Rol::all());
-        // return Rol::find(1)->empleados;
+        // return response()->json([
+        //     'res' => true,
+        //     'roles' => Rol::all()
+        // ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreRolRequest $request)
     {
-        Rol::create($request->all());
-        return response()->json([
+        return (new RolResource(Rol::create($request->all())))
+        ->additional([
             'res' => true,
             'msg' => 'Rol guardado correctamente.'
-        ], 201);
+        ]);
 
-        // return (new RolResource(Rol::create($request->all())))
-        // ->additional([
+        // Rol::create($request->all());
+        // return response()->json([
+        //     'res' => true,
         //     'msg' => 'Rol guardado correctamente.'
-        // ]);
+        // ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Rol $rol)
     {
-        return response()->json([
+        return (new RolResource($rol))
+        ->additional([
             'res' => true,
-            'rol' => $rol
-        ], 200);
+            'msg' => 'Rol mostrado correctamente.'
+        ]);
+
+        // return response()->json([
+        //     'res' => true,
+        //     'rol' => $rol
+        // ], 200);
 
         // return new RolResource($rol);
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateRolRequest $request, Rol $rol)
     {
         $rol->update($request->all());
-        return response()->json([
+        return (new RolResource($rol))
+        ->additional([
             'res' => true,
             'msg' => 'Rol actualizado correctamente.'
-        ], 200);
+        ]);
 
         // $rol->update($request->all());
-        // return (new RolResource($rol))
-        // ->additional([
+        // return response()->json([
+        //     'res' => true,
         //     'msg' => 'Rol actualizado correctamente.'
-        // ]);
+        // ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Rol $rol)
     {
         $rol->update(['estado' => 'eliminado']);
-        return response()->json([
+        return (new RolResource($rol))
+        ->additional([
             'res' => true,
             'msg' => 'Rol eliminado correctamente.'
-        ], 200);
+        ]);
+
+        // $rol->update(['estado' => 'eliminado']);
+        // return response()->json([
+        //     'res' => true,
+        //     'msg' => 'Rol eliminado correctamente.'
+        // ], 200);
 
         // $rol->delete();
         // return response()->json([
