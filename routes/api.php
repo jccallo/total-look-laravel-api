@@ -36,3 +36,6 @@ Route::put('empleados/{empleado}', [EmpleadoController::class, 'update']);
 Route::delete('empleados/{empleado}', [EmpleadoController::class, 'destroy']);
 
 
+
+
+
