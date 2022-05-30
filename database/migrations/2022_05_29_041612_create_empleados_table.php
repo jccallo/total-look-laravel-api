@@ -18,11 +18,11 @@ class CreateEmpleadosTable extends Migration
 
             $table->string('nombre', 45); // not null
             $table->string('apellido', 45); // not null
-            $table->string('dni', 15)->unique(); // not null
-            $table->string('telefono', 15)->unique(); // not null
+            $table->string('dni', 30)->unique(); // not null
+            $table->string('telefono', 30)->unique(); // not null
             $table->string('direccion', 90); // not null
             $table->string('imagen', 255); // not null
-            $table->enum('estado', ['activo', 'eliminado'])->default('activo');
+            $table->enum('estado', ['activo', 'eliminado'])->default('activo'); // not null
             $table->string('email', 90)->unique(); // not null
             $table->string('password', 255); // not null
 
@@ -30,7 +30,6 @@ class CreateEmpleadosTable extends Migration
 
             $table->unsignedBigInteger('rol_id');
             $table->foreign('rol_id')->references('id')->on('roles');
-
         });
     }
 

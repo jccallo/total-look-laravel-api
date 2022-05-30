@@ -55,7 +55,6 @@ class EmpleadoController extends Controller
     {
         return (new EmpleadoResource($empleado))
             ->additional([
-                'roles' => Rol::all()->pluck('nombre', 'id'),
                 'res' => true,
                 'msg' => 'Empleado mostrado correctamente.'
             ]);

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEtiquetasTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateEtiquetasTable extends Migration
      */
     public function up()
     {
-        Schema::create('etiquetas', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nombre', 45); // not null
-            $table->enum('estado', ['activo', 'eliminado'])->default('activo');
+            $table->string('nombre', 45)->unique(); // not null
+            $table->string('descripcion', 90); // not null
+            $table->enum('estado', ['activo', 'eliminado'])->default('activo'); // not null
 
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateEtiquetasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('etiquetas');
+        Schema::dropIfExists('roles');
     }
 }

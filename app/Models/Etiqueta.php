@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Etiqueta extends Model
 {
     use HasFactory;
+
+    protected $table = 'etiquetas';
+
+    protected $fillable = [
+        'nombre',
+        'estado',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

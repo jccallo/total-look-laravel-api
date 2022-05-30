@@ -19,10 +19,11 @@ class EmpleadoFactory extends Factory
             'dni' => $this->faker->unique()->randomNumber(8, true),
             'telefono' => $this->faker->unique()->e164PhoneNumber(),
             'direccion' => $this->faker->address(),
-            'imagen' => $this->faker->image('public/storage/images', 75, 75, 'people', false),
-            'estado' => 'activo',
+            'imagen' => '20220529053558.png',
+            'estado' => $this->faker->randomElement(['activo', 'eliminado']),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt('12345678'),
+            'rol_id' => $this->faker->randomElement([1, 2]),
         ];
     }
 }

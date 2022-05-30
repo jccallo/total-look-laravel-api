@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RolFactory extends Factory
+class EtiquetaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,7 @@ class RolFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->unique()->randomElement(['admin', 'gerente', 'cajero', 'vendedor', 'repartidor']),
-            'descripcion' => $this->faker->sentence(),
+            'nombre' => $this->faker->unique()->randomElement(['Bata', 'Bubblegummers', 'Hawk']),
             'estado' => $this->faker->randomElement(['activo', 'eliminado']),
         ];
     }

@@ -28,8 +28,8 @@ class StoreEmpleadoRequest extends FormRequest
         return [
             'nombre' => ['required', 'max:45', 'string'],
             'apellido' => ['required', 'max:45', 'string'],
-            'dni' => ['required', 'max:15', 'string', Rule::unique('empleados', 'dni')],
-            'telefono' => ['required', 'max:15', 'string', Rule::unique('empleados', 'telefono')],
+            'dni' => ['required', 'max:30', 'string', Rule::unique('empleados', 'dni')],
+            'telefono' => ['required', 'max:30', 'string', Rule::unique('empleados', 'telefono')],
             'direccion' => ['required', 'max:90', 'string'],
             'imagen' => 'required|image|mimes:jpeg,png,svg|max:1024', // validacion en una sola linea
             'estado' => ['required', 'string'],
